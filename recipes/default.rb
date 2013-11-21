@@ -35,6 +35,14 @@ end
 package_name = ::File.basename(omnibus_package)
 package_local_path = "#{Chef::Config[:file_cache_path]}/#{package_name}"
 
+# create the #{Chef::Config[:file_cache_path]} directory
+directory "#{Chef::Config[:file_cache_path]}" do
+  owner "root"
+  group "root"
+  recursive true
+  action :create_if_missing
+end
+
 # omnibus_package is remote (ie a URI) let's download it
 if ::URI.parse(omnibus_package).absolute?
   remote_file package_local_path do
