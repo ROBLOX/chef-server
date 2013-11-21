@@ -40,7 +40,7 @@ directory "#{Chef::Config[:file_cache_path]}" do
   owner "root"
   group "root"
   recursive true
-  action :create_if_missing
+  action :create
 end
 
 # omnibus_package is remote (ie a URI) let's download it
